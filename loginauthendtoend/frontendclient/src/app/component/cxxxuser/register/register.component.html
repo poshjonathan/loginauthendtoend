@@ -1,0 +1,35 @@
+<p>
+  register works!
+</p>
+<div class="container">
+  <h1>Add New Contact</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <form (ngSubmit)="saveCxxxUser()" #registerForm="ngForm">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" [(ngModel)]="cxxxuser.name" name="name" id="name"required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="text" class="form-control" [(ngModel)]="cxxxuser.password" name="password" id="password" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="phone" class="form-control" [(ngModel)]="cxxxuser.phone" name="phone" id="phone" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" [(ngModel)]="cxxxuser.email" name="email" id="email" required>
+        </div>
+        <div class="form-group">
+          <label for="organization">Organization</label>
+          <input type="organization" class="form-control" [(ngModel)]="cxxxuser.organization" name="organization" id="organization" required>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success" [disabled]="!registerForm.form.valid">Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<p>
+  dashboard works!
+</p>
+<h1>Greeting</h1>
+<!--<div [hidden]="!authenticated()">-->
+  <!--<p>The ID is {{greeting.id}}</p>-->
+  <!--<p>The content is {{greeting.content}}</p>-->
+<!--</div>-->
+<!--<div [hidden]="authenticated()">-->
+  <!--<p>Login to see your greeting</p>-->
+<!--</div>-->
+
+
+<div class="container">
+  <h1>{{ cxuser.name }}</h1>
+  <dl class="list">
+    <dt>Phone</dt>
+    <dd>{{ cxuser.phone }}</dd>
+    <dt>Email</dt>
+    <dd>{{ cxuser.email }}</dd>
+  </dl>
+  <!--<div class="row">-->
+    <!--<div class="col-md-12">-->
+      <!--<a [routerLink]="['/edit', contact.id]" class="btn btn-success">EDIT</a>-->
+      <!--<button class="btn btn-danger" type="button" (click)="deleteContact(contact.id)">DELETE</button>-->
+    <!--</div>-->
+  <!--</div>-->
+</div>
