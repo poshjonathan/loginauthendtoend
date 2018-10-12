@@ -3,15 +3,19 @@ import { NgModule } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {RouterModule, Routes} from "@angular/router";
 
+/*-----------Components-------------*/
 import { AppComponent } from './app.component';
 import { CxxxuserComponent } from './component/cxxxuser/cxxxuser.component';
 import { RegisterComponent } from './component/cxxxuser/register/register.component';
-import {RouterModule, Routes} from "@angular/router";
 import { LoginComponent } from './component/cxxxuser/login/login.component';
-import {AppService} from "./app.service";
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { HomeComponent } from './component/home/home.component';
+
+/*-----------Services-------------*/
+import {AppService} from "./app.service";
+import {AuthenticationService} from "./service/authentication.service";
 
 
 const appRoutes: Routes =[
@@ -76,7 +80,7 @@ const appRoutes: Routes =[
       }
     )
   ],
-  providers: [AppService],
+  providers: [AppService, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,6 +4,9 @@ import com.example.loginauthendtoend.model.CxxxUser;
 import com.example.loginauthendtoend.repository.CxxxUserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,8 +16,11 @@ import java.util.Base64;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class CxxxUserController {
+
     @Autowired
     CxxxUserRepository cxxxUserRepository;
+
+
 
 
     //---------------------Login a User (JWT)---------------------------------------
@@ -47,16 +53,16 @@ public class CxxxUserController {
 
     //---------------------Login a User---------------------------------------
 
-    @RequestMapping(method=RequestMethod.POST, value= "/login")
-    public boolean login(@RequestBody CxxxUser cxxxuser) {
-
-        CxxxUser c = cxxxUserRepository.findCxxxUserByName(cxxxuser.getName());
-
-        if (c != null) {
-            return cxxxuser.getName().equals(c.getName()) && cxxxuser.getPassword().equals(c.getPassword());
-        }
-        return false;
-    }
+//    @RequestMapping(method=RequestMethod.POST, value= "/login")
+//    public boolean login(@RequestBody CxxxUser cxxxuser) {
+//
+//        CxxxUser c = cxxxUserRepository.findCxxxUserByName(cxxxuser.getName());
+//
+//        if (c != null) {
+//            return cxxxuser.getName().equals(c.getName()) && cxxxuser.getPassword().equals(c.getPassword());
+//        }
+//        return false;
+//    }
 
     //---------------------Show User's Details---------------------------------------
 
@@ -82,9 +88,29 @@ public class CxxxUserController {
 
     //---------------------Create a User---------------------------------------
 
+//    @RequestMapping(method=RequestMethod.POST, value="/allusers")
+//    public CxxxUser save(@RequestBody CxxxUser cxxxuser) {
+//
+//        cxxxUserRepository.save(cxxxuser);
+//        return cxxxuser;
+//    }
+
+    //---------------------Create a User (Modified with password encoder & roles)---------------------------------------
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @RequestMapping(method=RequestMethod.POST, value="/allusers")
     public CxxxUser save(@RequestBody CxxxUser cxxxuser) {
-        cxxxUserRepository.save(cxxxuser);
+
+        CxxxUser cxxxUser = new CxxxUser();
+        cxxxUser.setName(cxxxuser.getName());
+        cxxxUser.setPassword(passwordEncoder.encode(cxxxuser.getPassword()));
+        cxxxUser.setPhone(cxxxuser.getPhone());
+        cxxxUser.setEmail(cxxxuser.getEmail());
+        cxxxUser.setOrganization(cxxxuser.getOrganization());
+        // For role field, to be added in the future
+       // cxxxUser.setRole(new Role(Integer.valueOf(1), user));
+        cxxxUserRepository.save(cxxxUser);
         return cxxxuser;
     }
 
@@ -99,7 +125,7 @@ public class CxxxUserController {
         if(cxxxuser.getName() != null)
             c.setName(cxxxuser.getName());
         if(cxxxuser.getPassword() != null)
-            c.setPassword(cxxxuser.getPassword());
+            c.setPassword(passwordEncoder.encode(cxxxuser.getPassword()));
         if(cxxxuser.getPhone() != null)
             c.setPhone(cxxxuser.getPhone());
         if(cxxxuser.getEmail() != null)

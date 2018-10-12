@@ -18,6 +18,11 @@ public class CxxxUser {
 
     }
 
+    public CxxxUser(String name, String password){
+        this.name=name;
+        this.password=password;
+    }
+
     public CxxxUser(String name, String password, String phone, String email, String organization){
         this.name=name;
         this.password=password;

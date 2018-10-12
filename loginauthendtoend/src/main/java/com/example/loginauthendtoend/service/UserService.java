@@ -1,6 +1,6 @@
-package com.example.loginauthendtoend.service;
-
-public interface UserService {
-
-
-}
+//package com.example.loginauthendtoend.service;
+//
+//public interface UserService {
+//
+//
+//}

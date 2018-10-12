@@ -1,5 +1,7 @@
 package com.example.loginauthendtoend.config;
 
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 
 /**
@@ -7,7 +9,7 @@ import java.io.Serializable;
  */
 public class JwtAuthenticationResponse implements Serializable {
 
-    private static final long serialVersionUID = 1250166508152483573L;
+   // private static final long serialVersionUID = 1250166508152483573L;
 
     private final String token;
 
