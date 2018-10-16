@@ -92,6 +92,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         }
 
+        // Servlet Filters are an implementation of the Chain of responsibility design pattern.
+        // All filters are chained (in the order of their definition in web.xml).
+        // The chain.doFilter() is proceeding to the net element in the chain. The last element of the chain
+        // is the target resource/servet
         chain.doFilter(req, res);
     }
 }

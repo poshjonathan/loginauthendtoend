@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RouterModule, Routes} from "@angular/router";
 
 /*-----------Components-------------*/
@@ -16,6 +16,9 @@ import { HomeComponent } from './component/home/home.component';
 /*-----------Services-------------*/
 import {AppService} from "./app.service";
 import {AuthenticationService} from "./service/authentication.service";
+import {TokenStorage} from "./service/token.storage";
+import {Token} from "@angular/compiler";
+import {Interceptor} from "./app.interceptor";
 
 
 const appRoutes: Routes =[
@@ -38,6 +41,11 @@ const appRoutes: Routes =[
     path: 'dashboard/:name',
     component: DashboardComponent,
     data: { title: 'This is dashboard, you are lgged in' },
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    data: { title: 'dashboard' },
   },
   // {
   //   path: 'detail/:id',
@@ -80,7 +88,11 @@ const appRoutes: Routes =[
       }
     )
   ],
-  providers: [AppService, AuthenticationService],
+  providers: [AppService, AuthenticationService, TokenStorage, {
+    provide:HTTP_INTERCEPTORS,
+    useClass: Interceptor,
+    multi :true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
