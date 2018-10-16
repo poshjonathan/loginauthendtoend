@@ -12,7 +12,7 @@ import {log} from "util";
 import {logging} from "selenium-webdriver";
 import {logger} from "codelyzer/util/logger";
 
-describe('LoginComponent', () => {
+fdescribe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let debugElement: DebugElement;
